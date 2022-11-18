@@ -1,0 +1,72 @@
+img {
+  max-width: 50px;
+}
+.container-selector {
+  background-color: #009879;
+  padding: 5px 20px;
+}
+.container-table {
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(15px);
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+  thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 12px 15px;
+  }
+
+  .points {
+    font-weight: bold;
+  }
+  .eventSort:hover {
+    cursor: pointer;
+    background-color: green;
+  }
+  img:hover {
+    cursor: pointer;
+  }
+
+  .teamRow:hover {
+    background-color: rgba(247, 16, 16, 0.164);
+    color: rgb(83, 83, 83);
+    font-size: 1em;
+    font-style: initial;
+  }
+  .lastFive {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .victory {
+      border: 1px solid greenyellow;
+      color: greenyellow;
+      padding: 0 3px;
+    }
+
+    .defeat {
+      border: 1px solid red;
+      color: red;
+      padding: 0 3px;
+    }
+    .draw {
+      border: 1px solid grey;
+      color: grey;
+      padding: 0 3px;
+    }
+  }
+}

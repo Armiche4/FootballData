@@ -1,0 +1,7 @@
+<div class="scrollmenu">
+  <a *ngFor="let team of teams" href="/team/{{ team.id }}"
+    ><img src="{{ team.crest }}" alt="{{ team.name }}" /><span>{{
+      team.name
+    }}</span></a
+  >
+</div>

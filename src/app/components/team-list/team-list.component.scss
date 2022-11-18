@@ -1,0 +1,32 @@
+img {
+  width: 20px;
+}
+
+div.scrollmenu {
+  background-color: #333;
+  //overflow: auto;
+  overflow-y: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+::-webkit-scrollbar {
+  height: 8px;
+  background: #777;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  background: yellow;
+  border-radius: 10px;
+}

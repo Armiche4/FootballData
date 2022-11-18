@@ -1,0 +1,76 @@
+<app-team-list [offset]="teamId"></app-team-list>
+
+<div class="container-info">
+  <img src="{{ team.crest }}" alt="" />
+
+  <h1>{{ team.name }}</h1>
+  <img src="{{ team.country }}" alt="" class="country-flag" />
+
+  <p>{{ "Founded" | translate }}: {{ team.founded }}</p>
+
+  <p>{{ "Coach" | translate }}: {{ team.coach }}</p>
+
+  <p>{{ team.stadium }}</p>
+</div>
+<div class="color-container">
+  <div
+    *ngFor="let color of teamColors"
+    [ngStyle]="{ backgroundColor: color }"
+    class="colored"
+  ></div>
+</div>
+
+<div class="container">
+  <div class="menu">
+    <button
+      [ngClass]="{ active: tabIndex === 0 }"
+      (click)="switchCategory(0)"
+      mat-raised-button
+    >
+      {{ "Squad" | translate }}
+    </button>
+    <button
+      [ngClass]="{ active: tabIndex === 1 }"
+      (click)="switchCategory(1)"
+      mat-raised-button
+    >
+      {{ "NextMatches" | translate }}
+    </button>
+    <button
+      [ngClass]="{ active: tabIndex === 2 }"
+      (click)="switchCategory(2)"
+      mat-raised-button
+    >
+      {{ "UpComingMatches" | translate }}
+    </button>
+  </div>
+  <ul class="responsive-table" *ngIf="isMachtesVisible == false">
+    <li class="table-header">
+      <div class="col col-1">{{ "Name" | translate }}</div>
+      <div class="col col-2">{{ "Position" | translate }}</div>
+      <div class="col col-3">{{ "Birth" | translate }}</div>
+      <div class="col col-4">{{ "Nacionality" | translate }}</div>
+    </li>
+    <li class="table-row" *ngFor="let player of team.squad">
+      <div class="col col-1" data-label="Name">{{ player.name }}</div>
+      <div class="col col-2" data-label="Position">
+        {{ player.position }}
+      </div>
+      <div class="col col-3" data-label="Birth">{{ player.dateOfBirth }}</div>
+      <div class="col col-4" data-label="Nacionality">
+        {{ player.nationality }}
+      </div>
+    </li>
+  </ul>
+  <app-team-matches
+    *ngIf="ispreVisible"
+    [team]="team"
+    [matcheStatus]="'SCHEDULED'"
+  ></app-team-matches>
+
+  <app-team-matches
+    *ngIf="ispostVisible"
+    [team]="team"
+    [matcheStatus]="'FINISHED'"
+  ></app-team-matches>
+</div>

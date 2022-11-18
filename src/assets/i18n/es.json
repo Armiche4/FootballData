@@ -1,0 +1,20 @@
+{
+  "Name": "Nombre",
+  "W": "G",
+  "L": "D",
+  "D": "E",
+  "GF": "GF",
+  "GA": "GC",
+  "Form": "Últimos partidos",
+  "ChooseCompt": "Elige la liga",
+  "ChooseLang": "Elige la temporada",
+  "Coach": "Entrenador",
+  "Founded": "Fundado",
+  "Squad": "Plantilla",
+  "Position": "Posicion",
+  "Birth": "Nacimiento",
+  "Nacionality": "Nacionalidad",
+  "Matches": "Partidos",
+  "NextMatches": "Partidos proximos",
+  "UpComingMatches": "Partidos anteriores"
+}

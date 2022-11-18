@@ -1,0 +1,37 @@
+<div class="match-container" *ngFor="let match of matches">
+  <div class="competition-container">
+    <img
+      src="{{ match.competition.crest }}"
+      alt="{{ match.competition.name }}"
+      class="logo-competition"
+    />
+    <p>
+      {{ match.date | date: "shortDate" }}
+    </p>
+  </div>
+  <div class="teams-container">
+    <div class="team">
+      <img
+        src="{{ match.homeTeam.crest }}"
+        alt="{{ match.homeTeam.name }}"
+        class="logo-team"
+        (click)="goTo(match.homeTeam.id)"
+      />
+      <p (click)="goTo(match.homeTeam.id)">{{ match.homeTeam.name }}</p>
+    </div>
+    <div class="result">
+      <p *ngIf="matcheStatus === 'FINISHED'">
+        {{ match.homeTeamGoals }} - {{ match.awayTeamGoals }}
+      </p>
+    </div>
+    <div class="team">
+      <img
+        src="{{ match.awayTeam.crest }}"
+        alt="{{ match.awayTeam.name }}"
+        class="logo-team"
+        (click)="goTo(match.awayTeam.id)"
+      />
+      <p (click)="goTo(match.awayTeam.id)">{{ match.awayTeam.name }}</p>
+    </div>
+  </div>
+</div>
