@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableTeamsComponent } from './components/table-teams/table-teams.component';
@@ -18,6 +22,12 @@ import { ErrorDefaultComponent } from './components/errorComponents/error-defaul
 import { TeamMatchesComponent } from './components/team-matches/team-matches.component';
 import { DateTransformPipe } from './pipes/date-transform.pipe';
 import { MatButtonModule } from '@angular/material/button';
+import { TeamsEliminatoryComponent } from './components/teams-eliminatory/teams-eliminatory.component';
+import { CompetitionFilterComponent } from './components/competition-filter/competition-filter.component';
+import { RankTeamsComponent } from './components/rank-teams/rank-teams.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { PlayersTopComponent } from './components/players-top/players-top.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +40,11 @@ import { MatButtonModule } from '@angular/material/button';
     ErrorDefaultComponent,
     TeamMatchesComponent,
     DateTransformPipe,
+    TeamsEliminatoryComponent,
+    CompetitionFilterComponent,
+    RankTeamsComponent,
+    SpinnerComponent,
+    PlayersTopComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +63,9 @@ import { MatButtonModule } from '@angular/material/button';
       defaultLanguage: 'es',
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,11 +1,12 @@
-img {
-  max-width: 50px;
-}
-
 .container-table {
   display: flex;
   justify-content: center;
   backdrop-filter: blur(15px);
+}
+
+img {
+  max-width: 50px;
+  width: 50px;
 }
 
 .styled-table {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { errorHandler } from './error-handler.service';
 
@@ -23,6 +23,18 @@ export class MainServiceService {
           headers: this.headers,
         }
       )
+      .pipe(
+        catchError((err) => {
+          console.log('Handling error locally and rethrowing it...');
+          return errorHandler(err);
+        })
+      );
+  }
+  getEliminatory(competition: string): Observable<any> {
+    return this.http
+      .get<any>('/api/v4/competitions/' + competition + '/standings', {
+        headers: this.headers,
+      })
       .pipe(
         catchError((err) => {
           console.log('Handling error locally and rethrowing it...');
@@ -94,6 +106,22 @@ export class MainServiceService {
       .get<any>('/api/v4/teams/' + id + '/matches', {
         headers: this.headers,
       })
+      .pipe(
+        catchError((err) => {
+          console.log('Handling error locally and rethrowing it...', err);
+          return errorHandler(err);
+        })
+      );
+  }
+
+  getTopScorers(competition: string, season: string): Observable<any> {
+    return this.http
+      .get<any>(
+        '/api/v4/competitions/' + competition + '/scorers?season=' + season,
+        {
+          headers: this.headers,
+        }
+      )
       .pipe(
         catchError((err) => {
           console.log('Handling error locally and rethrowing it...', err);

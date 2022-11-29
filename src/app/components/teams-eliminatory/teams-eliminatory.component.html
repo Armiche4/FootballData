@@ -1,0 +1,10 @@
+<app-competition-filter
+  [type]="'CUP'"
+  (newItemEvent)="getCompetitionData($event)"
+></app-competition-filter>
+
+<app-rank-teams
+  *ngFor="let team of teams"
+  [type]="'CUP'"
+  [teams]="team"
+></app-rank-teams>

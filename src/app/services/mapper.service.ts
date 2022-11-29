@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatchesInt } from '../interfaces/matches-int';
-import { PlayerInt } from '../interfaces/playerInt';
+import { PlayerInt, ScorersInt } from '../interfaces/playerInt';
 import { TeamInt } from '../interfaces/teamInt';
 import { getAge } from '../utils/time.utils';
 
@@ -66,5 +66,17 @@ export class MapperService {
         } as MatchesInt;
       })
       .filter((match) => match.status === matchSatus);
+  }
+
+  scorersMapper(rawDataScorers: []): ScorersInt[] {
+    return rawDataScorers.map((player: any) => {
+      return {
+        player: player.player,
+        goals: player.goals,
+        assists: player.assists,
+        penanlties: player.penanlties,
+        team: player.team,
+      };
+    });
   }
 }

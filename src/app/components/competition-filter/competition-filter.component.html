@@ -1,0 +1,31 @@
+<div *ngIf="loaderService.isLoading$ | async">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="container-selector">
+  <mat-form-field appearance="standard">
+    <mat-label>{{ "ChooseCompt" | translate }}</mat-label>
+    <mat-select [(value)]="currentCompetition" (selectionChange)="onSelected()">
+      <mat-option
+        *ngFor="let competition of competitions"
+        value="{{ competition.code }}"
+      >
+        <img
+          *ngIf="competition.emblem != undefined"
+          width="25px"
+          src="{{ competition?.emblem }}"
+          alt="{{ competition.code }} logo"
+        />
+        {{ competition.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="standard" *ngIf="type === 'LEAGUE'">
+    <mat-label>{{ "ChooseLang" | translate }}</mat-label>
+    <mat-select [(value)]="currentSeason" (selectionChange)="onSelected()">
+      <mat-option *ngFor="let season of seasons" value="{{ season }}">
+        {{ season }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

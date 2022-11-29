@@ -4,6 +4,7 @@
   "D": "D",
   "GF": "GF",
   "GA": "GA",
+  "GD": "GD",
   "Form": "Form",
   "ChooseCompt": "Choose Competition",
   "ChooseLang": "Choose Season",
@@ -16,5 +17,12 @@
   "Nacionality": "Nacionality",
   "Matches": "Matches",
   "NextMatches": "Next Matches",
-  "UpComingMatches": "UpComing Matches"
+  "UpComingMatches": "UpComing Matches",
+  "Tables": "Tables",
+  "Eliminatories": "Eliminatories",
+  "Players": "Players",
+  "Team": "Team",
+  "Goals": "Goals",
+  "Assists": "Assists",
+  "Penanlties": "Penanlties"
 }

@@ -1,0 +1,37 @@
+<app-competition-filter
+  [type]="'LEAGUE'"
+  (newItemEvent)="getCompetitionData($event)"
+></app-competition-filter>
+
+<ul class="responsive-table">
+  <li class="table-header">
+    <div class="col col-1">{{ "Name" | translate }}</div>
+    <div class="col col-2">{{ "Team" | translate }}</div>
+    <div class="col col-3">{{ "Nacionality" | translate }}</div>
+    <div class="col col-4">{{ "Goals" | translate }}</div>
+    <div class="col col-5">{{ "Assists" | translate }}</div>
+  </li>
+  <li class="table-row" *ngFor="let player of players">
+    <div class="col col-1" data-label="Name">{{ player.player.name }}</div>
+    <div class="col col-2" data-label="Position">
+      <td class="tooltip">
+        <img
+          src="{{ player.team.crest }}"
+          alt="{{ player.team.name }} logo"
+          (click)="goToTeam(player.team.id)"
+        />
+        <span class="tooltiptext">{{ player.team.name }}</span>
+      </td>
+    </div>
+
+    <div class="col col-3" data-label="Nacionality">
+      {{ player.player.nationality }}
+    </div>
+    <div class="col col-4" data-label="Goals">
+      {{ player.goals }}
+    </div>
+    <div class="col col-5" data-label="Assists">
+      {{ player.assists }}
+    </div>
+  </li>
+</ul>

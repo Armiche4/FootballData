@@ -5,6 +5,7 @@
   "D": "E",
   "GF": "GF",
   "GA": "GC",
+  "GD": "DG",
   "Form": "Últimos partidos",
   "ChooseCompt": "Elige la liga",
   "ChooseLang": "Elige la temporada",
@@ -16,5 +17,12 @@
   "Nacionality": "Nacionalidad",
   "Matches": "Partidos",
   "NextMatches": "Partidos proximos",
-  "UpComingMatches": "Partidos anteriores"
+  "UpComingMatches": "Partidos anteriores",
+  "Tables": "Ligas",
+  "Eliminatories": "Eliminatorias",
+  "Players": "Jugadores",
+  "Team": "Equipo",
+  "Goals": "Goles",
+  "Assists": "Asistencias",
+  "Penanlties": "Penaltis"
 }
