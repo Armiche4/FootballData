@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { MatchesInt, stageMatch } from 'src/app/interfaces/matches-int';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { MainServiceService } from 'src/app/services/main-service.service';
+import { MapperService } from 'src/app/services/mapper.service';
+import { TeamBracketsComponent } from '../team-brackets/team-brackets.component';
 
 @Component({
   selector: 'app-teams-eliminatory',
@@ -10,12 +19,19 @@ import { MainServiceService } from 'src/app/services/main-service.service';
 export class TeamsEliminatoryComponent implements OnInit {
   constructor(
     private service: MainServiceService,
-    private error: ErrorHandlerService
+    private error: ErrorHandlerService,
+    private mapper: MapperService
   ) {}
 
+  @ViewChild('matches', { static: true })
+  matchesComponent!: HTMLElement;
+
+  stage = stageMatch;
   currentCompetition = 'WC';
 
   teams: any[] = [];
+
+  matchesStaged: any[] = [];
 
   ngOnInit(): void {
     this.getTableData();
@@ -30,6 +46,7 @@ export class TeamsEliminatoryComponent implements OnInit {
     this.service.getEliminatory(this.currentCompetition).subscribe((data) => {
       try {
         this.teams = [];
+        console.log(data);
         data.standings.map((team: any) => {
           team.goalDif = team.goalsFor - team.goalsAgainst;
           this.teams.push(team.table);
@@ -38,5 +55,41 @@ export class TeamsEliminatoryComponent implements OnInit {
         this.error.goToPageError(data);
       }
     });
+
+    this.service
+      .getEliminatoryMatches(this.currentCompetition)
+      .subscribe((data) => {
+        try {
+          let matches: MatchesInt[] = [];
+          this.matchesStaged = [];
+          data.matches.map((match: any) => {
+            if (match.stage !== 'GROUP_STAGE') {
+              matches.push(match);
+            }
+          });
+
+          matches = this.mapper.machesMapper(matches as []);
+          this.matchesStaged.push(
+            this.mapper.getMatchesFromStage(matches, 'LAST_16')
+          );
+          this.matchesStaged.push(
+            this.mapper.getMatchesFromStage(matches, 'QUARTER_FINALS')
+          );
+          this.matchesStaged.push(
+            this.mapper.getMatchesFromStage(matches, 'SEMI_FINALS')
+          );
+          this.matchesStaged.push(
+            this.mapper.getMatchesFromStage(matches, 'FINAL')
+          );
+        } catch {
+          this.error.goToPageError(data);
+        }
+      });
+  }
+
+  scroll(elem: string) {
+    document
+      ?.querySelector(elem)
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

@@ -1,0 +1,67 @@
+<div class="tournament-bracket__match" tabindex="0">
+  <table class="tournament-bracket__table">
+    <caption class="tournament-bracket__caption">
+      <time datetime="1998-02-18">{{ match?.date | date : "shortDate" }}</time>
+    </caption>
+    <tbody class="tournament-bracket__content">
+      <tr class="tournament-bracket__team">
+        <td
+          class="tournament-bracket__country tooltip"
+          (click)="goTo(match?.homeTeam?.id)"
+        >
+          <abbr class="tournament-bracket__code"
+            >{{ match?.homeTeam?.name | NameToShortTransform }}
+          </abbr>
+
+          <img
+            *ngIf="match?.homeTeam?.crest"
+            src="{{ match?.homeTeam?.crest }}"
+            alt="{{ match?.homeTeam?.name }}"
+            class="tournament-bracket__flag flag-icon"
+            aria-label="Flag"
+          />
+          <span class="tooltiptext">{{ match?.homeTeam?.name }}</span>
+        </td>
+        <td class="tournament-bracket__score">
+          <span
+            class="tournament-bracket__number"
+            [ngClass]="{
+              winner: match?.homeTeamGoals > match?.awayTeamGoals,
+              none: match.status === 'TIMED'
+            }"
+            >{{ match?.homeTeamGoals }}</span
+          >
+        </td>
+      </tr>
+      <tr class="tournament-bracket__team">
+        <td
+          class="tournament-bracket__country tooltip"
+          (click)="goTo(match?.awayTeam?.id)"
+        >
+          <abbr class="tournament-bracket__code">{{
+            match?.awayTeam?.name | NameToShortTransform
+          }}</abbr>
+
+          <img
+            *ngIf="match?.awayTeam?.crest"
+            src="{{ match?.awayTeam?.crest }}"
+            alt="{{ match?.awayTeam?.name }}"
+            class="tournament-bracket__flag flag-icon"
+            aria-label="Flag"
+          />
+          <span class="tooltiptext">{{ match?.awayTeam?.name }}</span>
+        </td>
+        <td class="tournament-bracket__score">
+          <span
+            class="tournament-bracket__number"
+            [ngClass]="{
+              winner: match?.homeTeamGoals < match?.awayTeamGoals,
+              none: match.status === 'TIMED'
+            }"
+            >{{ match?.awayTeamGoals }}</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

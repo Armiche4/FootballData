@@ -2,9 +2,21 @@
   [type]="'CUP'"
   (newItemEvent)="getCompetitionData($event)"
 ></app-competition-filter>
-
+<div class="sticky">
+  <ul>
+    <li>
+      <a (click)="scroll('#table')">{{ "Tables" | translate }}</a>
+    </li>
+    <li>
+      <a (click)="scroll('#matches')"> {{ "Eliminatories" | translate }}</a>
+    </li>
+  </ul>
+</div>
 <app-rank-teams
   *ngFor="let team of teams"
   [type]="'CUP'"
   [teams]="team"
+  id="table"
 ></app-rank-teams>
+
+<app-team-brackets id="matches" [matches]="matchesStaged"></app-team-brackets>

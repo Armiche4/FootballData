@@ -28,6 +28,9 @@ import { RankTeamsComponent } from './components/rank-teams/rank-teams.component
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { PlayersTopComponent } from './components/players-top/players-top.component';
+import { TeamBracketsComponent } from './components/team-brackets/team-brackets.component';
+import { TeamBracketsMatchComponent } from './components/team-brackets-match/team-brackets-match.component';
+import { NameTransformPipe } from './pipes/name-transform.pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { PlayersTopComponent } from './components/players-top/players-top.compon
     RankTeamsComponent,
     SpinnerComponent,
     PlayersTopComponent,
+    TeamBracketsComponent,
+    TeamBracketsMatchComponent,
+    NameTransformPipe,
   ],
   imports: [
     BrowserModule,

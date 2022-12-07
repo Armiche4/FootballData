@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatchesInt } from '../interfaces/matches-int';
+import { MatchesInt, stageMatch } from '../interfaces/matches-int';
 import { PlayerInt, ScorersInt } from '../interfaces/playerInt';
 import { TeamInt } from '../interfaces/teamInt';
 import { getAge } from '../utils/time.utils';
@@ -39,7 +39,7 @@ export class MapperService {
 
   machesMapper(
     rawDataMatches: [],
-    matchSatus: 'SCHEDULED' | 'FINISHED'
+    matchSatus?: 'SCHEDULED' | 'FINISHED'
   ): MatchesInt[] {
     return rawDataMatches
       .map((match: any) => {
@@ -63,9 +63,17 @@ export class MapperService {
           homeTeamGoals: match.score.fullTime.home,
           date: new Date(match.utcDate),
           status: match.status,
+          stage: match?.stage,
+          id: match?.id ? match?.id : undefined,
         } as MatchesInt;
       })
-      .filter((match) => match.status === matchSatus);
+      .filter((match) => {
+        if (matchSatus != undefined) {
+          return match.status === matchSatus;
+        } else {
+          return match;
+        }
+      });
   }
 
   scorersMapper(rawDataScorers: []): ScorersInt[] {
@@ -78,5 +86,12 @@ export class MapperService {
         team: player.team,
       };
     });
+  }
+
+  getMatchesFromStage(
+    matches: MatchesInt[],
+    stage: stageMatch | string
+  ): MatchesInt[] {
+    return matches.filter((match) => match.stage == stage);
   }
 }

@@ -43,6 +43,19 @@ export class MainServiceService {
       );
   }
 
+  getEliminatoryMatches(competition: string): Observable<any> {
+    return this.http
+      .get<any>('/api/v4/competitions/' + competition + '/matches', {
+        headers: this.headers,
+      })
+      .pipe(
+        catchError((err) => {
+          console.log('Handling error locally and rethrowing it...');
+          return errorHandler(err);
+        })
+      );
+  }
+
   getCompetitions(): Observable<any> {
     return this.http
       .get<any>('/api/v4/competitions/', {
