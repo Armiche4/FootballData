@@ -1,23 +1,22 @@
 <div class="tournament-container">
   <div class="tournament-brackets">
-    <ul class="bracket bracket-1">
-      <li *ngFor="let match of matches[0]" class="team-item">
-        <app-team-brackets-match [match]="match"></app-team-brackets-match>
-      </li>
-    </ul>
-    <ul class="bracket bracket-2">
-      <li *ngFor="let match of matches[1]" class="team-item">
-        <app-team-brackets-match [match]="match"></app-team-brackets-match>
-      </li>
-    </ul>
-    <ul class="bracket bracket-3">
-      <li *ngFor="let match of matches[2]" class="team-item">
-        <app-team-brackets-match [match]="match"></app-team-brackets-match>
-      </li>
-    </ul>
-    <ul class="bracket bracket-4">
-      <li *ngFor="let match of matches[3]" class="team-item">
-        <app-team-brackets-match [match]="match"></app-team-brackets-match>
+    <ul
+      *ngFor="let matchesGroup of matches; let i = index"
+      class="bracket bracket-{{ i }}"
+    >
+      <li *ngFor="let match of matchesGroup" class="team-item">
+        <app-team-brackets-match
+          *ngIf="currentCompetition === 'WC' || match?.stage === 'FINAL'"
+          [match]="match"
+        ></app-team-brackets-match>
+        <app-team-brackets-match
+          *ngIf="currentCompetition !== 'WC' && match?.stage !== 'FINAL'"
+          [match]="match[0]"
+        ></app-team-brackets-match>
+        <app-team-brackets-match
+          *ngIf="currentCompetition !== 'WC' && match?.stage !== 'FINAL'"
+          [match]="match[1]"
+        ></app-team-brackets-match>
       </li>
     </ul>
   </div>

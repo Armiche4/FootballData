@@ -19,7 +19,7 @@ export class CompetitionFilterComponent implements OnInit {
 
   seasons: number[] = [];
 
-  currentSeason = new Date().getFullYear().toString();
+  currentSeason = (new Date().getFullYear() - 1).toString();
 
   constructor(
     private service: MainServiceService,
@@ -31,7 +31,7 @@ export class CompetitionFilterComponent implements OnInit {
     this.getSeasons();
     this.service.getCompetitions().subscribe((data) => {
       data.competitions?.map((comp: any) => {
-        if (comp.type === this.type) {
+        if (comp.type === this.type && comp.code !== 'EC') {
           this.competitions.push(comp);
         }
       });

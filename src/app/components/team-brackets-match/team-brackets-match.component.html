@@ -1,7 +1,7 @@
 <div class="tournament-bracket__match" tabindex="0">
   <table class="tournament-bracket__table">
     <caption class="tournament-bracket__caption">
-      <time datetime="1998-02-18">{{ match?.date | date : "shortDate" }}</time>
+      <time>{{ match?.date | date : "shortDate" }}</time>
     </caption>
     <tbody class="tournament-bracket__content">
       <tr class="tournament-bracket__team">
@@ -27,7 +27,7 @@
             class="tournament-bracket__number"
             [ngClass]="{
               winner: match?.homeTeamGoals > match?.awayTeamGoals,
-              none: match.status === 'TIMED'
+              none: match?.status === 'TIMED'
             }"
             >{{ match?.homeTeamGoals }}</span
           >
@@ -56,7 +56,7 @@
             class="tournament-bracket__number"
             [ngClass]="{
               winner: match?.homeTeamGoals < match?.awayTeamGoals,
-              none: match.status === 'TIMED'
+              none: match?.status === 'TIMED'
             }"
             >{{ match?.awayTeamGoals }}</span
           >

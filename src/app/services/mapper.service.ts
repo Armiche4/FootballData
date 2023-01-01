@@ -90,8 +90,31 @@ export class MapperService {
 
   getMatchesFromStage(
     matches: MatchesInt[],
-    stage: stageMatch | string
-  ): MatchesInt[] {
-    return matches.filter((match) => match.stage == stage);
+    stage: stageMatch | string,
+    competition: string
+  ): any[] {
+    if (competition !== 'WC' && stage !== 'FINAL') {
+      return this.getDoubleMatches(
+        matches.filter((match) => match.stage == stage)
+      );
+    } else {
+      return matches.filter((match) => match.stage == stage);
+    }
+  }
+
+  getDoubleMatches(matches: MatchesInt[]) {
+    let matchesDoubleResult = [];
+
+    for (let i = 0; i < matches.length; i++) {
+      for (let j = i + 1; j < matches.length; j++) {
+        if (matches[i].awayTeam.id === matches[j].homeTeam.id) {
+          let twoMatchesEliminatory = [];
+          twoMatchesEliminatory.push(matches[i]);
+          twoMatchesEliminatory.push(matches[j]);
+          matchesDoubleResult.push(twoMatchesEliminatory);
+        }
+      }
+    }
+    return matchesDoubleResult;
   }
 }

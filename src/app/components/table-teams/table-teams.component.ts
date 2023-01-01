@@ -21,7 +21,7 @@ export class TableTeamsComponent implements OnInit {
 
   currentCompetition = 'PD';
 
-  currentSeason = new Date().getFullYear().toString();
+  currentSeason = (new Date().getFullYear() - 1).toString();
 
   ngOnInit(): void {
     this.getTableData();

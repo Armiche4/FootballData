@@ -1,15 +1,8 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatchesInt, stageMatch } from 'src/app/interfaces/matches-int';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { MainServiceService } from 'src/app/services/main-service.service';
 import { MapperService } from 'src/app/services/mapper.service';
-import { TeamBracketsComponent } from '../team-brackets/team-brackets.component';
 
 @Component({
   selector: 'app-teams-eliminatory',
@@ -46,7 +39,6 @@ export class TeamsEliminatoryComponent implements OnInit {
     this.service.getEliminatory(this.currentCompetition).subscribe((data) => {
       try {
         this.teams = [];
-        console.log(data);
         data.standings.map((team: any) => {
           team.goalDif = team.goalsFor - team.goalsAgainst;
           this.teams.push(team.table);
@@ -69,17 +61,34 @@ export class TeamsEliminatoryComponent implements OnInit {
           });
 
           matches = this.mapper.machesMapper(matches as []);
+
           this.matchesStaged.push(
-            this.mapper.getMatchesFromStage(matches, 'LAST_16')
+            this.mapper.getMatchesFromStage(
+              matches,
+              'LAST_16',
+              this.currentCompetition
+            )
           );
           this.matchesStaged.push(
-            this.mapper.getMatchesFromStage(matches, 'QUARTER_FINALS')
+            this.mapper.getMatchesFromStage(
+              matches,
+              'QUARTER_FINALS',
+              this.currentCompetition
+            )
           );
           this.matchesStaged.push(
-            this.mapper.getMatchesFromStage(matches, 'SEMI_FINALS')
+            this.mapper.getMatchesFromStage(
+              matches,
+              'SEMI_FINALS',
+              this.currentCompetition
+            )
           );
           this.matchesStaged.push(
-            this.mapper.getMatchesFromStage(matches, 'FINAL')
+            this.mapper.getMatchesFromStage(
+              matches,
+              'FINAL',
+              this.currentCompetition
+            )
           );
         } catch {
           this.error.goToPageError(data);

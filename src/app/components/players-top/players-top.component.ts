@@ -13,7 +13,7 @@ import { MapperService } from 'src/app/services/mapper.service';
 export class PlayersTopComponent implements OnInit {
   currentCompetition = 'PD';
 
-  currentSeason = new Date().getFullYear().toString();
+  currentSeason = (new Date().getFullYear() - 1).toString();
 
   players: ScorersInt[] = [];
 

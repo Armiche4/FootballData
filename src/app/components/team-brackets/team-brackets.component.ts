@@ -9,7 +9,11 @@ import { MatchesInt, stageMatch } from 'src/app/interfaces/matches-int';
 export class TeamBracketsComponent implements OnInit {
   @Input() matches: any;
 
+  @Input() currentCompetition: string ='WC';
+  
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }
